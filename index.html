@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maklumat Pelanggan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e7f7e7;
+            border-radius: 8px;
+            border: 1px solid #d3e8d3;
+        }
+
+        .result h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Maklumat Pelanggan</h2>
+    <form id="customerForm">
+        <div class="form-group">
+            <label for="name">Nama Penuh</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Emel</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Nombor Telefon</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="bank">Akaun Bank (nombor akaun)</label>
+            <input type="text" id="bank" name="bank" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Hantar Maklumat">
+        </div>
+    </form>
+
+    <div class="result" id="result" style="display: none;">
+        <h3>Maklumat yang Dihantar:</h3>
+        <p><strong>Nama:</strong> <span id="resultName"></span></p>
+        <p><strong>Emel:</strong> <span id="resultEmail"></span></p>
+        <p><strong>Nombor Telefon:</strong> <span id="resultPhone"></span></p>
+        <p><strong>Akaun Bank:</strong> <span id="resultBank"></span></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById("customerForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Menghalang form dari memuat semula halaman
+
+        // Dapatkan data dari form
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const bank = document.getElementById("bank").value;
+
+        // Paparkan data yang dihantar
+        document.getElementById("resultName").textContent = name;
+        document.getElementById("resultEmail").textContent = email;
+        document.getElementById("resultPhone").textContent = phone;
+        document.getElementById("resultBank").textContent = bank;
+
+        // Tunjukkan hasil
+        document.getElementById("result").style.display = "block";
+    });
+</script>
+
+</body>
+</html>
