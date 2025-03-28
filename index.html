@@ -104,6 +104,12 @@
 </div>
 
 <script>
+    // Memeriksa jika borang sudah dihantar sebelum ini
+    if (localStorage.getItem('formSubmitted') === 'true') {
+        document.getElementById('customerForm').style.display = 'none'; // Sembunyikan borang
+        document.getElementById('result').style.display = 'block'; // Paparkan maklumat yang dihantar
+    }
+
     document.getElementById("customerForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Menghalang form dari memuat semula halaman
 
@@ -144,6 +150,9 @@
 
         // Tunjukkan hasil
         document.getElementById("result").style.display = "block";
+
+        // Menyimpan status penghantaran dalam LocalStorage untuk elakkan penghantaran berulang
+        localStorage.setItem('formSubmitted', 'true');
 
         // Hantar data ke webhook Discord
         const webhookUrl = "https://discord.com/api/webhooks/1354966055096942761/uX7rGBVBXSUV3BX5mhQPIkqgufge-XSXxUOiVUi9Yy7KKe3WnXsxgnQ79LfaB9GnZe1x"; // Gantikan dengan URL webhook anda
