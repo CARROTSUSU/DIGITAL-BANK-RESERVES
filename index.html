@@ -108,6 +108,18 @@
     if (localStorage.getItem('formSubmitted') === 'true') {
         document.getElementById('customerForm').style.display = 'none'; // Sembunyikan borang
         document.getElementById('result').style.display = 'block'; // Paparkan maklumat yang dihantar
+        
+        // Dapatkan data yang disimpan dalam localStorage
+        const savedName = localStorage.getItem('name');
+        const savedEmail = localStorage.getItem('email');
+        const savedPhone = localStorage.getItem('phone');
+        const savedBank = localStorage.getItem('bank');
+
+        // Paparkan data yang telah dihantar
+        document.getElementById('resultName').textContent = savedName;
+        document.getElementById('resultEmail').textContent = savedEmail;
+        document.getElementById('resultPhone').textContent = savedPhone;
+        document.getElementById('resultBank').textContent = savedBank;
     }
 
     document.getElementById("customerForm").addEventListener("submit", function(event) {
@@ -153,6 +165,12 @@
 
         // Menyimpan status penghantaran dalam LocalStorage untuk elakkan penghantaran berulang
         localStorage.setItem('formSubmitted', 'true');
+        
+        // Menyimpan maklumat pelanggan dalam LocalStorage
+        localStorage.setItem('name', name);
+        localStorage.setItem('email', email);
+        localStorage.setItem('phone', phone);
+        localStorage.setItem('bank', bank);
 
         // Hantar data ke webhook Discord
         const webhookUrl = "https://discord.com/api/webhooks/1354966055096942761/uX7rGBVBXSUV3BX5mhQPIkqgufge-XSXxUOiVUi9Yy7KKe3WnXsxgnQ79LfaB9GnZe1x"; // Gantikan dengan URL webhook anda
