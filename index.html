@@ -107,6 +107,11 @@
     document.getElementById("customerForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Menghalang form dari memuat semula halaman
 
+        // Menyembunyikan butang hantar untuk mengelakkan penghantaran berulang
+        const submitButton = document.querySelector("input[type='submit']");
+        submitButton.disabled = true;
+        submitButton.value = "Menghantar..."; // Mengubah teks butang
+
         // Dapatkan data dari form
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
@@ -119,11 +124,15 @@
 
         if (!emailPattern.test(email)) {
             alert("Sila masukkan emel yang sah.");
+            submitButton.disabled = false; // Membenarkan butang untuk dihantar semula jika ada ralat
+            submitButton.value = "Hantar Maklumat";
             return;
         }
 
         if (!phonePattern.test(phone)) {
             alert("Sila masukkan nombor telefon yang sah.");
+            submitButton.disabled = false;
+            submitButton.value = "Hantar Maklumat";
             return;
         }
 
