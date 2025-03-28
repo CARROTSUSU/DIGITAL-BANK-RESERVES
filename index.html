@@ -66,6 +66,21 @@
         .result h3 {
             text-align: center;
         }
+
+        .btn-update {
+            background-color: #ffa500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .btn-update:hover {
+            background-color: #ff8c00;
+        }
     </style>
 </head>
 <body>
@@ -100,11 +115,13 @@
         <p><strong>Emel:</strong> <span id="resultEmail"></span></p>
         <p><strong>Nombor Telefon:</strong> <span id="resultPhone"></span></p>
         <p><strong>Akaun Bank:</strong> <span id="resultBank"></span></p>
+        <!-- Butang Update -->
+        <button class="btn-update" id="updateButton">Update Maklumat</button>
     </div>
 </div>
 
 <script>
-    // Memeriksa jika borang sudah dihantar sebelum ini
+    // Memeriksa jika borang sudah dihantar sebelumnya
     if (localStorage.getItem('formSubmitted') === 'true') {
         document.getElementById('customerForm').style.display = 'none'; // Sembunyikan borang
         document.getElementById('result').style.display = 'block'; // Paparkan maklumat yang dihantar
@@ -120,6 +137,9 @@
         document.getElementById('resultEmail').textContent = savedEmail;
         document.getElementById('resultPhone').textContent = savedPhone;
         document.getElementById('resultBank').textContent = savedBank;
+
+        // Paparkan butang "Update"
+        document.getElementById('updateButton').style.display = 'inline-block';
     }
 
     document.getElementById("customerForm").addEventListener("submit", function(event) {
@@ -200,6 +220,22 @@
             console.error("Terdapat ralat semasa menghantar maklumat:", error);
             alert("Terdapat masalah semasa menghantar maklumat.");
         });
+    });
+
+    // Fungsi untuk mengemaskini borang
+    document.getElementById("updateButton").addEventListener("click", function() {
+        // Tampilkan semula borang dan sembunyikan hasil
+        document.getElementById('customerForm').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+
+        // Setkan semula nilai pada borang dengan data yang telah dihantar
+        document.getElementById("name").value = localStorage.getItem('name');
+        document.getElementById("email").value = localStorage.getItem('email');
+        document.getElementById("phone").value = localStorage.getItem('phone');
+        document.getElementById("bank").value = localStorage.getItem('bank');
+
+        // Hapuskan data yang ada dalam localStorage supaya pengguna boleh mengemas kini
+        localStorage.removeItem('formSubmitted');
     });
 </script>
 
