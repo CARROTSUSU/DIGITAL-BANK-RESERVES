@@ -160,8 +160,8 @@
         document.getElementById('resultPhone').textContent = savedPhone;
         document.getElementById('resultBank').textContent = savedBank;
 
-        // Paparkan butang "Update"
-        document.getElementById('updateButton').style.display = 'inline-block';
+        // Tandakan status pendaftaran berjaya
+        localStorage.setItem('isRegistered', 'true');
     }
 
     document.getElementById("customerForm").addEventListener("submit", function(event) {
@@ -214,34 +214,8 @@
         localStorage.setItem('phone', phone);
         localStorage.setItem('bank', bank);
 
-        // Hantar data ke webhook Discord
-        const webhookUrl = "https://discord.com/api/webhooks/1354966055096942761/uX7rGBVBXSUV3BX5mhQPIkqgufge-XSXxUOiVUi9Yy7KKe3WnXsxgnQ79LfaB9GnZe1x"; // Gantikan dengan URL webhook anda
-
-        const payload = {
-            content: `Nama: ${name}\nEmel: ${email}\nNombor Telefon: ${phone}\nAkaun Bank: ${bank}`
-        };
-
-        // Hantar POST request menggunakan fetch
-        fetch(webhookUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload) // Pastikan data dihantar dalam format JSON
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log("Maklumat berjaya dihantar!");
-                alert("Maklumat berjaya dihantar!");
-            } else {
-                console.error("Gagal menghantar maklumat:", response.statusText);
-                alert("Gagal menghantar maklumat.");
-            }
-        })
-        .catch(error => {
-            console.error("Terdapat ralat semasa menghantar maklumat:", error);
-            alert("Terdapat masalah semasa menghantar maklumat.");
-        });
+        // Tandakan status pendaftaran berjaya
+        localStorage.setItem('isRegistered', 'true');
     });
 
     // Fungsi untuk mengemaskini borang
